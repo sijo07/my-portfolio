@@ -1,0 +1,214 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --------------------------------- */
+/* Base Font Styles */
+/* --------------------------------- */
+body {
+  @apply text-white bg-black;
+  font-family: "Raleway", sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+  cursor: none !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Font utilities */
+.raleway-regular {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+}
+
+.raleway-bold {
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+}
+
+/* --------------------------------- */
+/* Scrollbar Styling */
+/* --------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #14b8a6, #3b82f6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --------------------------------- */
+/* Smooth Hover & Selection */
+/* --------------------------------- */
+a,
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+::selection {
+  background-color: #14b8a6;
+  color: white;
+}
+
+/* Gradient Text Utility */
+.gradient-text {
+  background: linear-gradient(90deg, #14b8a6, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cursor Visibility */
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  cursor: none !important;
+}
+
+/* Input Caret Accent */
+input,
+textarea {
+  caret-color: #14b8a6;
+}
+
+/* --------------------------------- */
+/* Section & Panel Styles */
+/* --------------------------------- */
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.panel {
+  width: 100%;
+  height: 100vh;
+}
+
+.pin-spacer {
+  height: 200vh;
+}
+
+/* --------------------------------- */
+/* Mobile: Restore system cursor */
+/* --------------------------------- */
+@media (max-width: 768px) {
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto !important;
+  }
+}
+
+/* --------------------------------- */
+/* Responsive Text Sizing */
+/* --------------------------------- */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2.5rem !important;
+  }
+
+  h2 {
+    font-size: 2rem !important;
+  }
+
+  p {
+    font-size: 1rem !important;
+  }
+
+  .panel-title {
+    font-size: 2rem !important;
+  }
+
+  .panel-desc {
+    font-size: 1rem !important;
+  }
+}
+
+/* --------------------------------- */
+/* Custom Utilities / Overrides */
+/* --------------------------------- */
+
+/* Optional subtle border & background consistency */
+@layer base {
+  * {
+    @apply border-gray-800;
+  }
+  body {
+    @apply bg-black text-white;
+  }
+}
+
+/* About Section Clip Path */
+.clip-about,
+.about-container {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
+}
+
+/* About Motion Background Transform */
+.about-bg {
+  transform: translate(-50%, -50%);
+}
+
+/* Resume Button Gradient & Shadow */
+.about-button-shadow {
+  box-shadow: 20px 20px 60px #1f2634, -20px -20px 60px #1f2634;
+  background: linear-gradient(
+    225deg,
+    hsla(271, 100%, 50%, 1) 0%,
+    hsla(294, 100%, 50%, 1) 100%
+  );
+  transition: all 0.4s ease-in-out;
+}
+
+.about-button-shadow:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Tailwind theme variables for colors */
+:root {
+  --card-light: #1e1e2f;
+  --text-primary: #ffffff;
+  --primary: #8a2be2;
+}
+
+.bg-card-light {
+  background-color: var(--card-light);
+}
+
+.text-textPrimary {
+  color: var(--text-primary);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.border-primary {
+  border-color: var(--primary);
+}
