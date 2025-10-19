@@ -18,7 +18,6 @@ body {
   overflow-x: hidden;
   position: relative;
   scroll-behavior: smooth;
-  cursor: none !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -68,20 +67,6 @@ button {
   background: linear-gradient(90deg, #14b8a6, #9333ea);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-/* Cursor Visibility */
-html {
-  scroll-behavior: smooth;
-  cursor: none;
-}
-
-a,
-button,
-input,
-textarea,
-select {
-  cursor: none !important;
 }
 
 /* Input Caret Accent */
@@ -153,16 +138,6 @@ section {
 /* Custom Utilities / Overrides */
 /* --------------------------------- */
 
-/* Optional subtle border & background consistency */
-@layer base {
-  * {
-    @apply border-gray-800;
-  }
-  body {
-    @apply bg-black text-white;
-  }
-}
-
 /* About Section Clip Path */
 .clip-about,
 .about-container {
@@ -211,4 +186,16 @@ section {
 
 .border-primary {
   border-color: var(--primary);
+}
+/* Cursor Visibility */
+html {
+  scroll-behavior: smooth;
+  cursor: none;
+}
+a,
+button,
+input,
+textarea,
+select {
+  cursor: none !important;
 }

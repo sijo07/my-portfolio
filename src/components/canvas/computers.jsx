@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-
 import CanvasLoader from "./loader";
 
 const Computers = ({ isMobile }) => {
@@ -13,8 +12,8 @@ const Computers = ({ isMobile }) => {
       <spotLight
         position={[-20, 50, 10]}
         angle={0.12}
-        decay={0}
         penumbra={1}
+        decay={0}
         intensity={1}
         castShadow
         shadow-mapSize={1024}
@@ -22,9 +21,9 @@ const Computers = ({ isMobile }) => {
       <pointLight intensity={1} />
       <primitive
         object={computer.scene}
-        scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
-        rotation={[-0.01, -0.2, -0.1]}
+        scale={isMobile ? 0.25 : 0.75}
+        position={isMobile ? [0, -1.5, -0.4] : [0, -3.25, -1.5]}
+        rotation={isMobile ? [0, -0.4, -0.1] : [0, -0.2, -0.1]}
       />
     </mesh>
   );
@@ -34,19 +33,13 @@ const ComputersCanvas = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 500px)");
-
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsMobile(mediaQuery.matches);
 
-    const handleMediaQueryChange = (event) => {
-      setIsMobile(event.matches);
-    };
-
+    const handleMediaQueryChange = (event) => setIsMobile(event.matches);
     mediaQuery.addEventListener("change", handleMediaQueryChange);
-
-    return () => {
+    return () =>
       mediaQuery.removeEventListener("change", handleMediaQueryChange);
-    };
   }, []);
 
   return (
@@ -54,18 +47,18 @@ const ComputersCanvas = () => {
       frameloop="demand"
       shadows
       dpr={[1, 2]}
-      camera={{ position: [20, 2, 5], fov: 25 }}
+      camera={{ position: isMobile ? [10, 1.5, 5] : [20, 2, 5], fov: 25 }}
       gl={{ preserveDrawingBuffer: true }}
+      className="w-full h-[500px] sm:h-[600px] md:h-[800px] lg:h-[900px]"
     >
       <Suspense fallback={<CanvasLoader />}>
         <OrbitControls
-          enableZoom={false} 
+          enableZoom={false}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
         <Computers isMobile={isMobile} />
       </Suspense>
-
       <Preload all />
     </Canvas>
   );

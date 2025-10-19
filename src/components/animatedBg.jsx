@@ -1,6 +1,6 @@
 import React from "react";
 
-const AboutMotion = () => (
+const AnimatedBackground = () => (
   <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
     <svg
       className="BgAnimation__svg"
@@ -123,4 +123,4 @@ const AboutMotion = () => (
   </div>
 );
 
-export default AboutMotion;
+export default AnimatedBackground;

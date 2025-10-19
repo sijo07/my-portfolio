@@ -1,5 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
-import { Header, Hero, Cursor, About } from "./components";
+import { About, Contact, Header, Hero, Projects } from "./sections";
+import { Cursor } from "./components";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
             <Cursor />
             <Hero />
             <About />
+            <Projects />
+            <Contact />
           </div>
         </div>
       </BrowserRouter>

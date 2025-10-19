@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 
 const Cursor = () => {
   const cursorRef = useRef(null);
-  const zoomRef = useRef(null);
+  const cursorBorderRef = useRef(null);
 
   const isMobile =
     typeof window !== "undefined" &&
@@ -13,121 +13,121 @@ const Cursor = () => {
 
   useEffect(() => {
     const cursor = cursorRef.current;
-    const zoomLens = zoomRef.current;
+    const cursorBorder = cursorBorderRef.current;
 
-    // Center cursor elements
-    gsap.set([cursor, zoomLens], { xPercent: -50, yPercent: -50 });
+    gsap.set([cursor, cursorBorder], { xPercent: -50, yPercent: -50 });
 
-    // Smooth movement using quickTo
     const xTo = gsap.quickTo(cursor, "x", {
-      duration: 0.18,
+      duration: 0.2,
       ease: "power3.out",
     });
     const yTo = gsap.quickTo(cursor, "y", {
-      duration: 0.18,
+      duration: 0.2,
       ease: "power3.out",
     });
-    const xZoom = gsap.quickTo(zoomLens, "x", {
-      duration: 0.18,
+    const xBorderTo = gsap.quickTo(cursorBorder, "x", {
+      duration: 0.4,
       ease: "power3.out",
     });
-    const yZoom = gsap.quickTo(zoomLens, "y", {
-      duration: 0.18,
+    const yBorderTo = gsap.quickTo(cursorBorder, "y", {
+      duration: 0.4,
       ease: "power3.out",
     });
 
     const moveCursor = (e) => {
-      const { clientX, clientY } = e;
-
-      // Move cursor and zoom lens
-      xTo(clientX);
-      yTo(clientY);
-      xZoom(clientX);
-      yZoom(clientY);
-
-      // Move background of zoom lens to simulate magnification
-      zoomLens.style.backgroundPosition = `${
-        -clientX * 1.5 + window.innerWidth / 2
-      }px ${-clientY * 1.5 + window.innerHeight / 2}px`;
+      xTo(e.clientX);
+      yTo(e.clientY);
+      xBorderTo(e.clientX);
+      yBorderTo(e.clientY);
     };
 
-    window.addEventListener("mousemove", moveCursor);
+    const handleMouseDown = () => {
+      gsap.to(cursor, { scale: 0.7, duration: 0.15, ease: "power3.out" });
+      gsap.to(cursorBorder, { scale: 0.8, opacity: 0.4, duration: 0.2 });
+    };
 
-    // Hover in: inner cursor expands, outer zoom lens slightly shrinks
+    const handleMouseUp = () => {
+      gsap.to(cursor, { scale: 1, duration: 0.2, ease: "elastic.out(1, 0.3)" });
+      gsap.to(cursorBorder, { scale: 1, opacity: 0.6, duration: 0.3 });
+    };
+
     const handleHoverIn = () => {
-      gsap.to(cursor, {
-        scale: 1.5, // inner circle grows
-        backgroundColor: "rgba(255,255,255,0.9)",
+      gsap.to(cursorBorder, {
+        scale: 1.8,
+        opacity: 0.2,
+        borderColor: "#D8B4FE",
         duration: 0.3,
-        ease: "power3.out",
-        boxShadow: "0 0 15px rgba(255,255,255,0.5)",
       });
-      gsap.to(zoomLens, {
-        opacity: 1,
-        scale: 0.95, // outer lens slightly smaller
-        duration: 0.4,
-        ease: "power3.out",
-      });
+      gsap.to(cursor, { backgroundColor: "#D8B4FE", duration: 0.3 });
     };
 
-    // Hover out: reset cursor and zoom lens
     const handleHoverOut = () => {
-      gsap.to(cursor, {
+      gsap.to(cursorBorder, {
         scale: 1,
-        backgroundColor: "#ffffff",
+        opacity: 0.6,
+        borderColor: "#D8B4FE",
         duration: 0.3,
-        ease: "power3.out",
-        boxShadow: "0 0 0 rgba(0,0,0,0)",
       });
-      gsap.to(zoomLens, {
-        opacity: 0,
-        scale: 0.9, // original size when not hovered
-        duration: 0.4,
-        ease: "power3.out",
-      });
+      gsap.to(cursor, { backgroundColor: "#D8B4FE", duration: 0.3 });
     };
 
-    // Targets for hover effects
-    const hoverTargets = document.querySelectorAll(
-      "h1, h2, h3, h4, p, span, strong, em, a, button, img, .hoverable"
-    );
-    hoverTargets.forEach((el) => {
+    // Optional: subtle idle pulsing
+    const idlePulse = gsap.to(cursor, {
+      scale: 1.05,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      duration: 1.5,
+      paused: true,
+    });
+
+    let idleTimeout;
+    const startIdlePulse = () => idlePulse.restart(true);
+    const stopIdlePulse = () => idlePulse.pause(0);
+
+    const resetIdle = () => {
+      clearTimeout(idleTimeout);
+      stopIdlePulse();
+      idleTimeout = setTimeout(startIdlePulse, 3000); // start pulse after 3s idle
+    };
+
+    window.addEventListener("mousemove", (e) => {
+      moveCursor(e);
+      resetIdle();
+    });
+
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    const hoverElements = document.querySelectorAll("a, button, .hoverable");
+    hoverElements.forEach((el) => {
       el.addEventListener("mouseenter", handleHoverIn);
       el.addEventListener("mouseleave", handleHoverOut);
     });
 
+    resetIdle(); // start idle timer
+
     return () => {
       window.removeEventListener("mousemove", moveCursor);
-      hoverTargets.forEach((el) => {
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
+      hoverElements.forEach((el) => {
         el.removeEventListener("mouseenter", handleHoverIn);
         el.removeEventListener("mouseleave", handleHoverOut);
       });
+      clearTimeout(idleTimeout);
     };
   }, []);
 
   return (
     <>
-      {/* Inner cursor circle */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-[45px] h-[45px] rounded-full bg-white mix-blend-difference pointer-events-none z-[9999]"
-        style={{
-          transition: "box-shadow 0.3s ease",
-        }}
+        className="fixed top-0 left-0 w-[16px] h-[16px] bg-purple-700 rounded-full pointer-events-none z-[9999] mix-blend-difference shadow-[0_0_20px_rgba(216,180,254,0.6)]"
       />
-
-      {/* Zoom lens */}
       <div
-        ref={zoomRef}
-        className="fixed top-0 left-0 w-[90px] h-[90px] rounded-full pointer-events-none z-[9998] opacity-0 scale-90 border-2 border-white overflow-hidden mix-blend-normal"
-        style={{
-          backgroundImage: `url(${window.location.href})`,
-          backgroundSize: `${window.innerWidth * 1.8}px ${
-            window.innerHeight * 1.8
-          }px`,
-          backgroundRepeat: "no-repeat",
-          transition: "background-position 0.1s ease-out",
-        }}
+        ref={cursorBorderRef}
+        className="fixed top-0 left-0 w-[40px] h-[40px] border border-purple-500 rounded-full pointer-events-none z-[9998] mix-blend-difference opacity-60 backdrop-blur-[2px]"
       />
     </>
   );
