@@ -4,11 +4,11 @@ import { AnimatedBackground } from "../components";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen mx-auto bg-black">
+    <section className="relative w-full h-screen mx-auto bg-black overflow-hidden">
       <AnimatedBackground />
 
       {/* Text Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-16 flex flex-row items-start gap-5 mt-[100px] md:mt-[140px]">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-16 flex flex-col md:flex-row items-center md:items-start gap-5 mt-[100px] md:mt-[120px] lg:mt-[140px]">
         <motion.div
           variants={{
             hidden: { x: -100, opacity: 0 },
@@ -27,12 +27,12 @@ const Hero = () => {
           }}
           initial="hidden"
           animate="show"
-          className="flex flex-col justify-center items-start"
+          className="flex flex-col justify-center items-center md:items-start text-center md:text-left"
         >
-          <h1 className="font-black text-white lg:text-[70px] sm:text-[60px] xs:text-[50px] text-[40px] leading-tight lg:leading-[90px] mt-4">
+          <h1 className="font-black text-white lg:text-[70px] md:text-[60px] sm:text-[50px] xs:text-[40px] text-[32px] leading-tight lg:leading-[90px] md:leading-[75px] mt-4">
             Hi, I'm <span className="text-purple-300">Sijo</span>
           </h1>
-          <p className="text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] leading-relaxed mt-3">
+          <p className="text-[#dfd9ff] font-medium lg:text-[30px] md:text-[26px] sm:text-[22px] xs:text-[18px] text-[16px] leading-relaxed mt-3">
             I develop user interfaces <br className="sm:block hidden" /> and web
             applications
           </p>

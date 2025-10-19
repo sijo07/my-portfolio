@@ -3,7 +3,7 @@ import { useGSAP } from "@gsap/react";
 import { Suspense, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
-import { GrFormNextLink, GrFormPreviousLink } from "react-icons/gr";
+import { GrFormNextLink, GrFormPreviousLink, GrLink } from "react-icons/gr";
 import { myProjects } from "../constants/index.js";
 import { CanvasLoader } from "../components/canvas";
 import { AnimatedBackground, DemoComputer } from "../components";
@@ -142,6 +142,18 @@ const Projects = () => {
             >
               <GrFormNextLink size={25} />
             </button>
+            <a
+              href={current.href}
+              target="_blank"
+              rel="noreferrer"
+              className="w-12 h-12 flex items-center justify-center
+             bg-gradient-to-r from-violet-800 to-pink-700 
+             rounded-full shadow-lg 
+             hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]
+             transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
+            >
+              <GrLink size={24} className="text-white" />
+            </a>
           </motion.div>
         </motion.div>
       </AnimatePresence>
