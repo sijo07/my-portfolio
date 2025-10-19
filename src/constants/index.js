@@ -75,6 +75,11 @@ export const myProjects = [
         path: "/assets/vitejs.png",
       },
       {
+        id: 4,
+        name: "Express js",
+        path: "/assets/express.png",
+      },
+      {
         id: 3,
         name: "TailwindCSS",
         path: "assets/tailwind.png",
@@ -82,8 +87,18 @@ export const myProjects = [
 
       {
         id: 4,
-        name: "Javascript",
-        path: "/assets/javascript.png",
+        name: "MongoDB",
+        path: "/assets/mongodb.png",
+      },
+      {
+        id: 5,
+        name: "Node js",
+        path: "/assets/node.png",
+      },
+      {
+        id: 6,
+        name: "Axios",
+        path: "/assets/axios.png",
       },
     ],
   },
@@ -94,13 +109,47 @@ export const myProjects = [
       "With LiveDoc, users can experience the future of collaboration, where multiple contributors work together in real time without any lag, by using Next.js and Liveblocks newest features.",
     href: "https://github.com/sijo07/theFashionisto",
     texture: "/textures/project/project2.mp4",
-    logo: "/assets/project-logo2.png",
-    logoStyle: {
-      backgroundColor: "#13202F",
-      border: "0.2px solid #17293E",
-      boxShadow: "0px 0px 60px 0px #2F6DB54D",
-    },
-    spotlight: "/assets/spotlight2.png",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 4,
+        name: "Express js",
+        path: "/assets/express.png",
+      },
+      {
+        id: 3,
+        name: "TailwindCSS",
+        path: "assets/tailwind.png",
+      },
+
+      {
+        id: 4,
+        name: "MongoDB",
+        path: "/assets/mongodb.png",
+      },
+      {
+        id: 4,
+        name: "Node js",
+        path: "/assets/node.png",
+      },
+    ],
+  },
+  {
+    title: "theGames",
+    desc: "theGames is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    href: "https://github.com/sijo07/the-gameapp",
+    texture: "/textures/project/project3.mp4",
     tags: [
       {
         id: 1,
@@ -114,53 +163,13 @@ export const myProjects = [
       },
       {
         id: 3,
-        name: "TailwindCSS",
-        path: "assets/tailwind.png",
-      },
-
-      {
-        id: 4,
-        name: "Javascript",
-        path: "/assets/javascript.png",
-      },
-    ],
-  },
-  {
-    title: "xo games",
-    desc: "An innovative healthcare platform designed to streamline essential medical processes. It simplifies patient registration, appointment scheduling, and medical record management, providing a seamless experience for both healthcare providers and patients.",
-    subdesc:
-      "With a focus on efficiency, CarePulse integrantes complex forms and SMS notifications, by using Next.js, Appwrite, Twillio and Sentry that enhance operational workflows.",
-    href: "https://www.youtube.com/watch?v=lEflo_sc82g",
-    texture: "/textures/project/project3.mp4",
-    logo: "/assets/project-logo3.png",
-    logoStyle: {
-      backgroundColor: "#60f5a1",
-      background:
-        "linear-gradient(0deg, #60F5A150, #60F5A150), linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(208, 213, 221, 0.8) 100%)",
-      border: "0.2px solid rgba(208, 213, 221, 1)",
-      boxShadow: "0px 0px 60px 0px rgba(35, 131, 96, 0.3)",
-    },
-    spotlight: "/assets/spotlight3.png",
-    tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/assets/react.svg",
-      },
-      {
-        id: 2,
-        name: "TailwindCSS",
-        path: "assets/tailwindcss.png",
-      },
-      {
-        id: 3,
-        name: "TypeScript",
-        path: "/assets/typescript.png",
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
       },
       {
         id: 4,
-        name: "Framer Motion",
-        path: "/assets/framer.png",
+        name: "Axios",
+        path: "/assets/axios.png",
       },
     ],
   },
