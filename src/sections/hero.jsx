@@ -44,7 +44,7 @@ const Hero = () => {
         <ComputersCanvas />
       </div>
 
-      <div className="absolute bottom-14 w-full flex justify-center items-center lg:hidden">
+      <div className="absolute bottom-20 w-full flex justify-center items-center lg:hidden">
         <a href="#about">
           <div className="w-[40px] h-[80px] rounded-3xl border-4 border-purple-400 flex flex-col justify-center items-center p-3">
             {[0, 1, 2].map((i) => (
