@@ -6,6 +6,8 @@ const Hero = () => {
   return (
     <section className="relative w-full h-screen mx-auto bg-black">
       <AnimatedBackground />
+
+      {/* Text Section */}
       <div className="absolute inset-0 top-[120px] max-w-7xl mx-auto px-6 sm:px-16 flex flex-row items-start gap-5">
         <motion.div
           variants={{
@@ -36,8 +38,38 @@ const Hero = () => {
           </p>
         </motion.div>
       </div>
+
+      {/* 3D Canvas */}
       <ComputersCanvas />
+
+      <div className="absolute bottom-24 w-full flex justify-center items-center lg:hidden">
+        <a href="#about">
+          <div className="w-[40px] h-[80px] rounded-3xl border-4 border-secondary flex flex-col justify-center items-center p-3">
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ y: -10, opacity: 0 }}
+                animate={{
+                  y: [0, 12, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 1.2,
+                  delay: i * 0.25, 
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut",
+                }}
+                className="mb-1"
+              >
+                <div className="w-3 h-3 border-b-2 border-r-2 border-purple-400 rotate-45"/>
+              </motion.div>
+            ))}
+          </div>
+        </a>
+      </div>
     </section>
   );
 };
+
 export default Hero;
