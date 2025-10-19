@@ -42,7 +42,7 @@ const Hero = () => {
       {/* 3D Canvas */}
       <ComputersCanvas />
 
-      <div className="absolute bottom-6 w-full flex justify-center items-center lg:hidden">
+      <div className="absolute bottom-24 w-full flex justify-center items-center lg:hidden">
         <a href="#about">
           <div className="w-[40px] h-[80px] rounded-3xl border-4 border-secondary flex flex-col justify-center items-center p-3">
             {[0, 1, 2].map((i) => (
