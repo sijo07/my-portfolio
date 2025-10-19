@@ -37,6 +37,16 @@ export const educationData = [
   },
 ];
 
+export const skillsData = [
+  { name: "React.js", level: 90 },
+  { name: "Node.js", level: 85 },
+  { name: "MongoDB", level: 80 },
+  { name: "MySQL", level: 75 },
+  { name: "JavaScript", level: 95 },
+  { name: "Tailwind CSS", level: 85 },
+  { name: "TypeScript", level: 80 },
+  { name: "Framer Motion", level: 70 },
+];
 
 export const myProjects = [
   {

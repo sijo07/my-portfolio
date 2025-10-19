@@ -1,33 +1,41 @@
 import React from "react";
-import { AnimatedBackground } from "./../components";
+import { skillsData } from "../constants";
+import { AnimatedBackground } from "../components";
+import { motion } from "framer-motion";
 
 const Skills = () => {
   return (
-    <>
-      <div id="skills">
-        <h1>Skills</h1>
-        <AnimatedBackground />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, sequi
-          dolore eius labore perspiciatis laudantium sapiente quas minus nemo
-          quia tempora aperiam repellat totam, tempore beatae? Commodi ad iusto
-          similique, ipsum reprehenderit quod qui iste debitis. Fugiat soluta
-          voluptates doloribus porro, dolorum distinctio perferendis nobis
-          facilis, cupiditate odio qui quas sunt. Laudantium magnam, neque
-          doloremque voluptate expedita eos illo temporibus? Error natus ut ea
-          possimus. Dignissimos esse non eligendi officiis! Facilis, amet quod a
-          recusandae adipisci laudantium nulla ab tempore, vero debitis velit
-          possimus, ratione ullam atque odit sunt voluptatum doloribus nesciunt
-          sequi dolores esse fugit odio facere ex! Facere laboriosam ab eum
-          praesentium fugit adipisci quia reiciendis dicta doloribus nam a in,
-          esse commodi voluptates nesciunt quos molestias! Obcaecati asperiores
-          unde voluptas nemo distinctio, cumque maiores, inventore ex eligendi
-          animi nesciunt quisquam placeat est enim odit pariatur molestias,
-          nulla dolor. Asperiores quaerat, modi est eaque officia blanditiis
-          similique quae!
-        </p>
+    <section
+      id="skills"
+      className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black text-[#dfd9ff] px-6 py-20"
+    >
+      <h1 className="text-5xl font-black mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+        Skills
+      </h1>
+
+      <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        {skillsData.map((skill, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: idx * 0.1, duration: 0.6 }}
+            className="flex flex-col items-center"
+          >
+            <span className="text-lg font-semibold mb-2">{skill.name}</span>
+            <div className="w-full bg-gray-800 rounded-full h-4">
+              <div
+                className="h-4 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
+                style={{ width: `${skill.level}%` }}
+              ></div>
+            </div>
+            <span className="mt-1 text-sm text-gray-400">{skill.level}%</span>
+          </motion.div>
+        ))}
       </div>
-    </>
+
+      <AnimatedBackground />
+    </section>
   );
 };
 

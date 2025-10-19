@@ -1,5 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
-import { About, Contact, Header, Hero, Projects } from "./sections";
+import {
+  Header,
+  Hero,
+  About,
+  Skills,
+  Projects,
+  Contact,
+  Footer,
+} from "./sections";
 import { Cursor } from "./components";
 
 function App() {
@@ -12,8 +20,10 @@ function App() {
             <Cursor />
             <Hero />
             <About />
+            <Skills />
             <Projects />
             <Contact />
+            <Footer />
           </div>
         </div>
       </BrowserRouter>

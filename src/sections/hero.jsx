@@ -8,7 +8,7 @@ const Hero = () => {
       <AnimatedBackground />
 
       {/* Text Section */}
-      <div className="absolute inset-0 top-[120px] max-w-7xl mx-auto px-6 sm:px-16 flex flex-row items-start gap-5">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-16 flex flex-row items-start gap-5 mt-[100px] md:mt-[140px]">
         <motion.div
           variants={{
             hidden: { x: -100, opacity: 0 },
@@ -29,10 +29,10 @@ const Hero = () => {
           animate="show"
           className="flex flex-col justify-center items-start"
         >
-          <h1 className="font-black text-white lg:text-[70px] sm:text-[60px] lg:mt-2 xs:text-[50px] text-[40px] lg:leading-[98px] mt-8">
+          <h1 className="font-black text-white lg:text-[70px] sm:text-[60px] xs:text-[50px] text-[40px] leading-tight lg:leading-[90px] mt-4">
             Hi, I'm <span className="text-purple-300">Sijo</span>
           </h1>
-          <p className="text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px] mt-2">
+          <p className="text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] leading-relaxed mt-3">
             I develop user interfaces <br className="sm:block hidden" /> and web
             applications
           </p>
@@ -40,11 +40,14 @@ const Hero = () => {
       </div>
 
       {/* 3D Canvas */}
-      <ComputersCanvas />
+      <div className="absolute inset-0">
+        <ComputersCanvas />
+      </div>
 
-      <div className="absolute bottom-24 w-full flex justify-center items-center lg:hidden">
+      {/* Scroll Indicator — visible only on mobile/tablet */}
+      <div className="absolute bottom-10 w-full flex justify-center items-center lg:hidden">
         <a href="#about">
-          <div className="w-[40px] h-[80px] rounded-3xl border-4 border-secondary flex flex-col justify-center items-center p-3">
+          <div className="w-[40px] h-[80px] rounded-3xl border-4 border-purple-400 flex flex-col justify-center items-center p-3">
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
@@ -55,14 +58,14 @@ const Hero = () => {
                 }}
                 transition={{
                   duration: 1.2,
-                  delay: i * 0.25, 
+                  delay: i * 0.25,
                   repeat: Infinity,
                   repeatType: "loop",
                   ease: "easeInOut",
                 }}
                 className="mb-1"
               >
-                <div className="w-3 h-3 border-b-2 border-r-2 border-purple-400 rotate-45"/>
+                <div className="w-3 h-3 border-b-2 border-r-2 border-purple-400 rotate-45" />
               </motion.div>
             ))}
           </div>
