@@ -56,13 +56,6 @@ export const myProjects = [
       "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js), along with Leaflet.js, Socket.io, and Threat Intelligence APIs, the system enables users to visualize, track, and analyze cyber incidents as they happen.",
     href: "https://github.com/sijo07/the-checkmate",
     texture: "/textures/project/project1.mp4",
-    logo: "/assets/project-logo1.png",
-    logoStyle: {
-      backgroundColor: "#2A1816",
-      border: "0.2px solid #36201D",
-      boxShadow: "0px 0px 60px 0px #AA3C304D",
-    },
-    spotlight: "/assets/spotlight1.png",
     tags: [
       {
         id: 1,
@@ -103,44 +96,19 @@ export const myProjects = [
     ],
   },
   {
-    title: "theFashionisto - Ecommerce Fashion",
-    desc: "LiveDoc is a powerful collaborative app that elevates the capabilities of real-time document editing. As an enhanced version of Google Docs, It supports millions of collaborators simultaneously, ensuring that every change is captured instantly and accurately.",
+    title: "theFashionisto - Online Fashion Store",
+    desc: "theFashionisto is a modern e-commerce platform designed to offer a seamless online shopping experience with efficient product management and user engagement.",
     subdesc:
-      "With LiveDoc, users can experience the future of collaboration, where multiple contributors work together in real time without any lag, by using Next.js and Liveblocks newest features.",
+      "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Vite.js, this platform features secure authentication, a dynamic shopping cart, personalized profiles — all styled with Tailwind CSS for a sleek, responsive design.",
     href: "https://github.com/sijo07/theFashionisto",
     texture: "/textures/project/project2.mp4",
     tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/assets/react.png",
-      },
-      {
-        id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
-      },
-      {
-        id: 4,
-        name: "Express js",
-        path: "/assets/express.png",
-      },
-      {
-        id: 3,
-        name: "TailwindCSS",
-        path: "assets/tailwind.png",
-      },
-
-      {
-        id: 4,
-        name: "MongoDB",
-        path: "/assets/mongodb.png",
-      },
-      {
-        id: 4,
-        name: "Node js",
-        path: "/assets/node.png",
-      },
+      { id: 1, name: "React.js", path: "/assets/react.png" },
+      { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
+      { id: 3, name: "Tailwind CSS", path: "/assets/tailwind.png" },
+      { id: 4, name: "Express.js", path: "/assets/express.png" },
+      { id: 5, name: "MongoDB", path: "/assets/mongodb.png" },
+      { id: 6, name: "Node.js", path: "/assets/node.png" },
     ],
   },
   {
