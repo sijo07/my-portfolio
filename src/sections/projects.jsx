@@ -84,7 +84,7 @@ const Projects = () => {
           <motion.h2
             variants={itemVariants}
             className="text-transparent bg-clip-text bg-gradient-to-r 
-                       from-purple-400 via-pink-500 to-purple-400 
+                       from-purple-500 via-pink-600 to-purple-600 
                        text-4xl sm:text-5xl lg:text-6xl font-extrabold mt-3 
                        drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]"
           >
@@ -107,16 +107,26 @@ const Projects = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-3 mt-6"
+            className="flex flex-wrap gap-4 mt-6 justify-start"
           >
             {current.tags.map((tag, i) => (
               <div
                 key={i}
-                className="p-2 rounded-lg bg-gradient-to-r 
-                           from-purple-800/40 to-pink-800/30 
-                           backdrop-blur-sm border border-purple-700/40"
+                className="relative group p-[2px] rounded-xl bg-gray-700 hover:to-purple-500 transition-all duration-300 ease-in-out"
               >
-                <img src={tag.path} alt={tag.name} className="w-6 h-6" />
+                <div
+                  className="flex items-center justify-center w-12 h-12 bg-black/40 backdrop-blur-md rounded-xl border border-purple-700 
+                   group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-300"
+                >
+                  <img
+                    src={tag.path}
+                    alt={tag.name}
+                    className="w-7 h-7 object-contain drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
+                  />
+                </div>
+                <span className="absolute mt-2 left-1/2 -translate-x-1/2 text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {tag.name}
+                </span>
               </div>
             ))}
           </motion.div>
@@ -127,7 +137,7 @@ const Projects = () => {
             className="flex items-center gap-5 mt-10"
           >
             <button
-              className="p-3 bg-gradient-to-r from-purple-900 to-violet-800 
+              className="p-3 bg-gradient-to-l from-purple-800 to-pink-900 
                          rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] 
                          transition-all"
               onClick={() => handleNavigation("previous")}
@@ -135,7 +145,7 @@ const Projects = () => {
               <GrFormPreviousLink size={25} />
             </button>
             <button
-              className="p-3 bg-gradient-to-r from-violet-800 to-pink-700 
+              className="p-3 bg-gradient-to-r from-purple-800 to-pink-900 
                          rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.8)] 
                          transition-all"
               onClick={() => handleNavigation("next")}
@@ -147,7 +157,7 @@ const Projects = () => {
               target="_blank"
               rel="noreferrer"
               className="w-12 h-12 flex items-center justify-center
-             bg-gradient-to-r from-violet-800 to-pink-700 
+             bg-gradient-to-r from-purple-800 to-pink-900 
              rounded-full shadow-lg 
              hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]
              transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
