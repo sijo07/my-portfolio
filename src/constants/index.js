@@ -45,18 +45,21 @@ export const internshipData = [
   },
 ];
 
-
 export const skillsData = [
-  { name: "React.js", level: 90 },
-  { name: "Node.js", level: 85 },
-  { name: "MongoDB", level: 80 },
-  { name: "MySQL", level: 75 },
-  { name: "JavaScript", level: 95 },
-  { name: "Tailwind CSS", level: 85 },
-  { name: "TypeScript", level: 80 },
-  { name: "Framer Motion", level: 70 },
+  { name: "React.js", path: "/assets/react.png" },
+  { name: "Next.js", path: "/assets/nextjs.png" },
+  { name: "Vite.js", path: "/assets/vitejs.png" },
+  { name: "WordPress", path: "/assets/wordpress.png" },
+  { name: "Tailwind CSS", path: "/assets/tailwind.png" },
+  { name: "Bootstrap 5", path: "/assets/bootstrap.png" },
+  { name: "Node.js", path: "/assets/node.png" },
+  { name: "MongoDB", path: "/assets/mongodb.png" },
+  { name: "JavaScript", path: "/assets/javascript.png" },
+  { name: "CSS3", path: "/assets/css.png" },
+  { name: "HTML", path: "/assets/html.png" },
+  { name: "Git", path: "/assets/git.png" },
+  { name: "Github", path: "/assets/github.png" },
 ];
-
 export const myProjects = [
   {
     title: "checkMate - Real Time Cyber Incident Tracker",
@@ -121,12 +124,27 @@ export const myProjects = [
     ],
   },
   {
+    title: "MyPortfolio - Developer Showcase",
+    desc: "A modern personal portfolio website built to highlight projects, skills, and experience through clean design and smooth animations.",
+    subdesc:
+      "Developed using Next.js, Tailwind CSS, and Framer Motion, this portfolio emphasizes responsive design, optimized performance, and fluid transitions. It showcases professional projects, certifications, and publications through dynamic layouts and interactive visuals.",
+    href: "https://github.com/sijo07/the-portfolio",
+    texture: "/textures/project/project3.mp4",
+    tags: [
+      { id: 1, name: "Next.js", path: "/assets/nextjs.png" },
+      { id: 2, name: "React.js", path: "/assets/react.png" },
+      { id: 3, name: "Tailwind CSS", path: "/assets/tailwind.png" },
+      { id: 4, name: "Framer Motion", path: "/assets/framer.png" },
+      { id: 5, name: "JavaScript", path: "/assets/javascript.png" },
+    ],
+  },
+  {
     title: "theGames",
     desc: "theGames is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
     href: "https://github.com/sijo07/the-gameapp",
-    texture: "/textures/project/project3.mp4",
+    texture: "/textures/project/project4.mp4",
     tags: [
       {
         id: 1,

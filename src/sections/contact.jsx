@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa";
@@ -30,7 +29,7 @@ const Contact = () => {
       if (response.ok) {
         setStatus("Ping! I got your message 📨");
         setFormData({ name: "", email: "", phone: "", message: "" });
-        setTimeout(() => setStatus(""), 5000); 
+        setTimeout(() => setStatus(""), 5000);
       } else {
         setStatus("Oops! Something went wrong.");
       }

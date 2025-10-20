@@ -4,7 +4,8 @@ import { Suspense, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
-import { GrFormNextLink, GrFormPreviousLink, GrLink } from "react-icons/gr";
+import { GrFormNextLink, GrFormPreviousLink, GrGithub } from "react-icons/gr";
+
 import { myProjects } from "../constants/index.js";
 import { CanvasLoader } from "../components/canvas";
 import {
@@ -151,13 +152,6 @@ const Projects = () => {
             >
               <GrFormPreviousLink size={25} />
             </button>
-            <button
-              className="p-3  bg-gradient-to-tr from-purple-700  to-pink-800
-                     rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
-              onClick={() => handleNavigation("next")}
-            >
-              <GrFormNextLink size={25} />
-            </button>
             <a
               href={current.href}
               target="_blank"
@@ -168,8 +162,15 @@ const Projects = () => {
                      hover:shadow-[0_0_25px_rgba(236,72,153,0.6)]
                      transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
-              <GrLink size={24} className="text-white" />
+              <GrGithub size={22} className="text-white" />
             </a>
+            <button
+              className="p-3  bg-gradient-to-tr from-purple-700  to-pink-800
+                     rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
+              onClick={() => handleNavigation("next")}
+            >
+              <GrFormNextLink size={25} />
+            </button>
           </motion.div>
         </motion.div>
       </AnimatePresence>

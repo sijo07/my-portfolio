@@ -1,40 +1,100 @@
-import React from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, AnimatePresence } from "framer-motion";
 import { skillsData } from "../constants";
-import { AnimatedBackground } from "../components";
-import { motion } from "framer-motion";
+import { AnimatedBackground, AnimatedUnderline } from "../components";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const Skills = () => {
+  useGSAP(() => {
+    gsap.fromTo(
+      ".tech-card",
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: "#skills",
+          start: "top 85%",
+        },
+      }
+    );
+  });
+
   return (
     <section
       id="skills"
-      className="relative w-full min-h-screen flex flex-col items-center justify-center bg-black text-[#dfd9ff] px-6 py-20"
+      className="relative min-h-screen flex flex-col items-start justify-start gap-12 px-6 lg:px-24 py-20 bg-black overflow-hidden"
     >
-      <h1 className="text-5xl font-black mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-        Skills
-      </h1>
+      {/* Animated Background */}
+      <AnimatedBackground className="absolute inset-0 -z-10" />
 
-      <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {skillsData.map((skill, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1, duration: 0.6 }}
-            className="flex flex-col items-center"
-          >
-            <span className="text-lg font-semibold mb-2">{skill.name}</span>
-            <div className="w-full bg-gray-800 rounded-full h-4">
-              <div
-                className="h-4 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"
-                style={{ width: `${skill.level}%` }}
-              ></div>
-            </div>
-            <span className="mt-1 text-sm text-gray-400">{skill.level}%</span>
-          </motion.div>
-        ))}
-      </div>
+      {/* Section Title */}
+      <motion.div
+        className="z-10 w-full text-left text-purple-300 mt-6"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <h3 className="text-lg font-semibold uppercase tracking-widest mb-6">
+          Tech Stack
+          <AnimatedUnderline />
+        </h3>
+      </motion.div>
 
-      <AnimatedBackground />
+      {/* Skills Cards Grid */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          className="z-10 w-full grid gap-6 grid-cols-3 md:grid-cols-5 lg:grid-cols-8 justify-items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {skillsData.map((skill, index) => (
+            <motion.div
+              key={index}
+              className="tech-card flex flex-col items-center justify-center bg-gray-900 hover:bg-gray-800 transition-all duration-300 w-24 h-44 lg:w-24 lg:h-44 md:w-32 md:h-60 rounded-2xl shadow-lg p-4 cursor-pointer"
+              whileHover={{
+                scale: 1.05,
+                transition: { type: "spring", stiffness: 250 },
+              }}
+              variants={itemVariants}
+            >
+              <motion.img
+                src={skill.path}
+                alt={skill.name}
+                className="w-10 h-10 sm:w-16 sm:h-16 object-contain mb-4"
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <p className="text-white font-semibold text-xs sm:text-sm text-center">
+                {skill.name}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 };
