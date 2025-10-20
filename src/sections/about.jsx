@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { aboutData, educationData } from "../constants";
+import { aboutData, educationData, internshipData } from "../constants";
 import { profile } from "../assets/index.js";
-import { AnimatedBackground } from "../components";
+import { AnimatedBackground, AnimatedUnderline } from "../components";
 
 const About = () => {
   return (
@@ -13,7 +13,6 @@ const About = () => {
       <div className="absolute inset-0 z-0">
         <AnimatedBackground />
         <div className="absolute inset-0 bg-black/20 mix-blend-screen"></div>
-
         <div className="absolute inset-0 overflow-hidden">
           {[...Array(12)].map((_, i) => (
             <motion.span
@@ -34,7 +33,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* === Left Section === */}
       <div className="relative z-10 w-full md:w-1/2 flex flex-col justify-center items-start text-left space-y-6">
         <motion.h3
           className="text-purple-300 text-lg font-semibold uppercase tracking-widest"
@@ -43,6 +41,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           About Me
+          <AnimatedUnderline />
         </motion.h3>
 
         <motion.h2
@@ -52,6 +51,7 @@ const About = () => {
           transition={{ duration: 1, delay: 0.2 }}
         >
           {aboutData.title}
+          <AnimatedUnderline width="w-32" height="h-2" duration={0.8} />
         </motion.h2>
 
         <motion.p
@@ -63,35 +63,99 @@ const About = () => {
           {aboutData.description}
         </motion.p>
 
-        {/* === Education Section === */}
         <motion.div
-          className="mt-6 space-y-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-6 w-full flex flex-col md:flex-row md:space-x-12 space-y-8 md:space-y-0"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.3 } },
+          }}
         >
-          <h3 className="text-purple-300 text-xl font-semibold">Education</h3>
-          {educationData.map((edu, i) => (
-            <div key={i} className="text-white">
-              <p className="font-bold">{edu.degree}</p>
-              <p className="text-sm font-semibold text-gray-400">
-                {edu.institution}&nbsp;|&nbsp;{edu.year}
-              </p>
-            </div>
-          ))}
+          <motion.div
+            className="flex-1 space-y-4"
+            variants={{ hidden: {}, visible: {} }}
+          >
+            <motion.h3
+              className="text-purple-300 text-lg font-semibold uppercase tracking-widest"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              Education
+              <AnimatedUnderline />
+            </motion.h3>
+
+            {educationData.map((edu, i) => (
+              <motion.div
+                key={i}
+                className="text-white"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+              >
+                <p className="font-bold text-lg">{edu.degree}</p>
+                <p className="text-base font-semibold text-gray-400 lining-nums">
+                  {edu.institution}&nbsp;&nbsp;
+                  <span className="font-bold text-2xl">|</span>&nbsp;&nbsp;
+                  {edu.year}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="flex-1 space-y-4"
+            variants={{ hidden: {}, visible: {} }}
+          >
+            <motion.h3
+              className="text-purple-300 text-lg font-semibold uppercase tracking-widest"
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+            >
+              Internship
+              <AnimatedUnderline />
+            </motion.h3>
+
+            {internshipData.map((intern, i) => (
+              <motion.div
+                key={i}
+                className="text-white"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+              >
+                <p className="font-bold text-lg">{intern.position}</p>
+                <p className="text-base font-semibold text-gray-400 lining-nums">
+                  {intern.company}&nbsp;&nbsp;
+                  <span className="font-bold text-2xl">|</span>&nbsp;&nbsp;
+                  {intern.period}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
 
         <motion.a
           href={aboutData.resumeLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="block md:inline-block mx-auto md:mx-0 bg-transparent border-2 border-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 ease-in-out text-white text-lg font-semibold py-4 px-10 rounded-xl mt-8"
+          className="block md:inline-block mx-auto md:mx-0 bg-transparent border-2 border-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 ease-in-out text-white text-lg font-semibold py-4 px-10 rounded-xl mt-6"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
         >
           Resume
         </motion.a>
       </div>
 
-      {/* === Right Section (Profile Image) === */}
       <motion.div
         className="relative z-10 w-full md:w-1/2 flex justify-center items-center mt-16 md:mt-0"
         initial={{ opacity: 0, scale: 0.9 }}

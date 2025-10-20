@@ -1,13 +1,17 @@
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Suspense, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
 import { GrFormNextLink, GrFormPreviousLink, GrLink } from "react-icons/gr";
 import { myProjects } from "../constants/index.js";
 import { CanvasLoader } from "../components/canvas";
-import { AnimatedBackground, DemoComputer } from "../components";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  AnimatedBackground,
+  DemoComputer,
+  AnimatedUnderline,
+} from "../components";
 
 const projectCount = myProjects.length;
 
@@ -58,8 +62,8 @@ const Projects = () => {
     <section
       id="projects"
       ref={detailsRef}
-      className="relative min-h-screen flex flex-col lg:flex-row items-center justify-center 
-                 gap-12 lg:gap-20 px-6 lg:px-24 py-20 bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col lg:flex-row items-start lg:items-center justify-center 
+             gap-12 lg:gap-20 px-6 lg:px-24 py-20 bg-black overflow-hidden"
     >
       {/* Glowing Orbit Background */}
       <AnimatedBackground className="absolute inset-0 -z-10" />
@@ -72,61 +76,65 @@ const Projects = () => {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="z-10 w-full lg:w-1/2 text-left text-white space-y-6"
+          className="z-10 w-full lg:w-1/2 text-left text-white flex flex-col space-y-6"
         >
-          <motion.p
+          <motion.h3
             variants={itemVariants}
-            className="text-purple-400 font-medium uppercase tracking-widest"
+            className="text-purple-400 text-lg font-semibold uppercase tracking-widest"
           >
             Project Showcase
-          </motion.p>
+            <AnimatedUnderline />
+          </motion.h3>
 
           <motion.h2
             variants={itemVariants}
-            className="text-transparent bg-clip-text bg-gradient-to-r 
-                       from-purple-500 via-pink-600 to-purple-600 
-                       text-4xl sm:text-5xl lg:text-6xl font-extrabold mt-3 
-                       drop-shadow-[0_0_20px_rgba(168,85,247,0.5)]"
+            className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600  to-pink-600 
+                   text-4xl sm:text-5xl lg:text-5xl font-bold mt-3 leading-snug"
           >
             {current.title}
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-gray-400 text-base sm:text-lg mt-6 max-w-[600px] leading-relaxed"
+            className="text-gray-200 text-base sm:text-lg mt-4 max-w-[580px] leading-relaxed tracking-wide antialiased"
           >
             {current.desc}
           </motion.p>
 
           <motion.p
             variants={itemVariants}
-            className="text-gray-500 text-sm sm:text-base mt-3"
+            className="text-gray-400 text-sm sm:text-base mt-2 max-w-[580px] leading-relaxed tracking-wide antialiased"
           >
             {current.subdesc}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap gap-4 mt-6 justify-start"
+            className="relative mt-6 w-full flex flex-wrap justify-start gap-4 perspective-1000"
           >
             {current.tags.map((tag, i) => (
               <div
                 key={i}
-                className="relative group p-[2px] rounded-xl bg-gray-700 hover:to-purple-500 transition-all duration-300 ease-in-out"
+                className="group relative flex items-center justify-center
+                 px-4 py-2 rounded-2xl
+                 bg-gradient-to-tr from-purple-700  to-pink-800
+                 text-white font-semibold text-sm cursor-pointer
+                 transform transition-all duration-500 hover:scale-110 hover:rotate-1"
               >
+                {/* Icon */}
+                <img
+                  src={tag.path}
+                  alt={tag.name}
+                  className="w-5 h-5 mr-2 object-contain flex-shrink-0"
+                />
+                {/* Label */}
+                <span className="whitespace-nowrap">{tag.name}</span>
+                {/* Hover Glow */}
                 <div
-                  className="flex items-center justify-center w-12 h-12 bg-black/40 backdrop-blur-md rounded-xl border border-purple-700 
-                   group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-300"
-                >
-                  <img
-                    src={tag.path}
-                    alt={tag.name}
-                    className="w-7 h-7 object-contain drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]"
-                  />
-                </div>
-                <span className="absolute mt-2 left-1/2 -translate-x-1/2 text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {tag.name}
-                </span>
+                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30
+                   bg-gradient-to-tr from-purple-400 via-pink-400 to-pink-500 blur-xl
+                   transition-opacity duration-300"
+                ></div>
               </div>
             ))}
           </motion.div>
@@ -137,17 +145,15 @@ const Projects = () => {
             className="flex items-center gap-5 mt-10"
           >
             <button
-              className="p-3 bg-gradient-to-l from-purple-800 to-pink-900 
-                         rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] 
-                         transition-all"
+              className="p-3  bg-gradient-to-tr from-purple-700  to-pink-800
+                     rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all"
               onClick={() => handleNavigation("previous")}
             >
               <GrFormPreviousLink size={25} />
             </button>
             <button
-              className="p-3 bg-gradient-to-r from-purple-800 to-pink-900 
-                         rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.8)] 
-                         transition-all"
+              className="p-3  bg-gradient-to-tr from-purple-700  to-pink-800
+                     rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
               onClick={() => handleNavigation("next")}
             >
               <GrFormNextLink size={25} />
@@ -157,10 +163,10 @@ const Projects = () => {
               target="_blank"
               rel="noreferrer"
               className="w-12 h-12 flex items-center justify-center
-             bg-gradient-to-r from-purple-800 to-pink-900 
-             rounded-full shadow-lg 
-             hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]
-             transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      bg-gradient-to-br from-purple-700  to-pink-800
+                     rounded-full shadow-lg 
+                     hover:shadow-[0_0_25px_rgba(236,72,153,0.6)]
+                     transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <GrLink size={24} className="text-white" />
             </a>

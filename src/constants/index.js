@@ -37,6 +37,15 @@ export const educationData = [
   },
 ];
 
+export const internshipData = [
+  {
+    position: "React js Developer Intern",
+    company: "Ewolwe Palakkad",
+    period: "Jun 2022 - Dec 2022",
+  },
+];
+
+
 export const skillsData = [
   { name: "React.js", level: 90 },
   { name: "Node.js", level: 85 },
