@@ -13,7 +13,6 @@ const AnimatedBackground = () => (
         opacity: 0.65,
       }}
     >
-      {/* Orbit Paths */}
       <g opacity="0.4">
         <path
           id="orbit_1"
@@ -37,7 +36,6 @@ const AnimatedBackground = () => (
         />
       </g>
 
-      {/* === Glowing Orbiting Balls === */}
       {[...Array(6)].map((_, i) => {
         const dur = 6 + i * 2;
         const colorList = [

@@ -1,26 +1,19 @@
 import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { Suspense, useState, useRef } from "react";
+import { Suspense, useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
 import { GrFormNextLink, GrFormPreviousLink, GrGithub } from "react-icons/gr";
 
-import { myProjects } from "../constants/index.js";
-import { CanvasLoader } from "../components/canvas";
-import {
-  AnimatedBackground,
-  DemoComputer,
-  AnimatedUnderline,
-} from "../components";
+import { myProjects } from "../constants";
+import { CanvasLoader, Computer } from "../components/canvas";
+import { AnimatedBackground, AnimatedUnderline } from "../components";
 
 const projectCount = myProjects.length;
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
+  visible: { transition: { staggerChildren: 0.15 } },
 };
 
 const itemVariants = {
@@ -30,22 +23,30 @@ const itemVariants = {
 
 const Projects = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const detailsRef = useRef(null);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNavigation = (direction) => {
     setSelectedProjectIndex((prev) => {
-      let nextIndex;
-      if (direction === "previous") {
-        nextIndex = prev === 0 ? projectCount - 1 : prev - 1;
-      } else {
-        nextIndex = prev === projectCount - 1 ? 0 : prev + 1;
-      }
+      const nextIndex =
+        direction === "previous"
+          ? prev === 0
+            ? projectCount - 1
+            : prev - 1
+          : prev === projectCount - 1
+          ? 0
+          : prev + 1;
 
       detailsRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-
       return nextIndex;
     });
   };
@@ -63,13 +64,9 @@ const Projects = () => {
     <section
       id="projects"
       ref={detailsRef}
-      className="relative min-h-screen flex flex-col lg:flex-row items-start lg:items-center justify-center 
-             gap-12 lg:gap-20 px-6 lg:px-24 py-20 bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col lg:flex-row items-start lg:items-center justify-center gap-12 lg:gap-20 px-6 lg:px-24 py-20 bg-black overflow-hidden"
     >
-      {/* Glowing Orbit Background */}
       <AnimatedBackground className="absolute inset-0 -z-10" />
-
-      {/* Project Details */}
       <AnimatePresence mode="wait">
         <motion.div
           key={selectedProjectIndex + "-text"}
@@ -89,22 +86,21 @@ const Projects = () => {
 
           <motion.h2
             variants={itemVariants}
-            className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600  to-pink-600 
-                   text-4xl sm:text-5xl lg:text-5xl font-bold mt-3 leading-snug"
+            className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 text-4xl sm:text-5xl lg:text-5xl font-bold mt-3 leading-snug"
           >
             {current.title}
           </motion.h2>
 
           <motion.p
             variants={itemVariants}
-            className="text-gray-200 text-base sm:text-lg mt-4 max-w-[580px] leading-relaxed tracking-wide antialiased"
+            className="text-gray-200 text-base sm:text-lg mt-4 max-w-[580px] leading-relaxed tracking-wide"
           >
             {current.desc}
           </motion.p>
 
           <motion.p
             variants={itemVariants}
-            className="text-gray-400 text-sm sm:text-base mt-2 max-w-[580px] leading-relaxed tracking-wide antialiased"
+            className="text-gray-400 text-sm sm:text-base mt-2 max-w-[580px] leading-relaxed tracking-wide"
           >
             {current.subdesc}
           </motion.p>
@@ -115,40 +111,28 @@ const Projects = () => {
           >
             {current.tags.map((tag, i) => (
               <div
-                key={i}
-                className="group relative flex items-center justify-center
-                 px-4 py-2 rounded-2xl
-                 bg-gradient-to-tr from-purple-700  to-pink-800
-                 text-white font-semibold text-sm cursor-pointer
-                 transform transition-all duration-500 hover:scale-110 hover:rotate-1"
+                key={tag.name}
+                className="group relative flex items-center justify-center px-4 py-2 rounded-2xl bg-gradient-to-tr from-purple-700 to-pink-800 text-white font-semibold text-sm cursor-pointer transform transition-all duration-500 hover:scale-110 hover:rotate-1"
               >
-                {/* Icon */}
                 <img
                   src={tag.path}
                   alt={tag.name}
                   className="w-5 h-5 mr-2 object-contain flex-shrink-0"
                 />
-                {/* Label */}
                 <span className="whitespace-nowrap">{tag.name}</span>
-                {/* Hover Glow */}
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30
-                   bg-gradient-to-tr from-purple-400 via-pink-400 to-pink-500 blur-xl
-                   transition-opacity duration-300"
-                ></div>
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 bg-gradient-to-tr from-purple-400 via-pink-400 to-pink-500 blur-xl transition-opacity duration-300"></div>
               </div>
             ))}
           </motion.div>
 
-          {/* Navigation Buttons */}
           <motion.div
             variants={itemVariants}
             className="flex items-center gap-5 mt-10"
           >
             <button
-              className="p-3  bg-gradient-to-tr from-purple-700  to-pink-800
-                     rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all"
+              aria-label="Previous Project"
               onClick={() => handleNavigation("previous")}
+              className="p-3 bg-gradient-to-tr from-purple-700 to-pink-800 rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all"
             >
               <GrFormPreviousLink size={25} />
             </button>
@@ -156,18 +140,15 @@ const Projects = () => {
               href={current.href}
               target="_blank"
               rel="noreferrer"
-              className="w-12 h-12 flex items-center justify-center
-                      bg-gradient-to-br from-purple-700  to-pink-800
-                     rounded-full shadow-lg 
-                     hover:shadow-[0_0_25px_rgba(236,72,153,0.6)]
-                     transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
+              aria-label="GitHub Repo"
+              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-purple-700 to-pink-800 rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <GrGithub size={22} className="text-white" />
             </a>
             <button
-              className="p-3  bg-gradient-to-tr from-purple-700  to-pink-800
-                     rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
+              aria-label="Next Project"
               onClick={() => handleNavigation("next")}
+              className="p-3 bg-gradient-to-tr from-purple-700 to-pink-800 rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
             >
               <GrFormNextLink size={25} />
             </button>
@@ -175,7 +156,6 @@ const Projects = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* 3D Model */}
       <AnimatePresence mode="wait">
         <motion.div
           key={selectedProjectIndex}
@@ -183,9 +163,7 @@ const Projects = () => {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -300, opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="relative z-10 w-full lg:w-1/2 
-                     h-[320px] sm:h-[420px] md:h-[480px] 
-                     flex justify-center items-center"
+          className="relative z-10 w-full lg:w-1/2 h-[320px] sm:h-[420px] md:h-[480px] flex justify-center items-center"
         >
           <div className="w-full h-full rounded-2xl">
             <Canvas>
@@ -194,13 +172,13 @@ const Projects = () => {
               <Center>
                 <Suspense fallback={<CanvasLoader />}>
                   <group
-                    scale={window.innerWidth < 1024 ? 2.2 : 2.3}
+                    scale={windowWidth < 1024 ? 2.2 : 2.3}
                     position={
-                      window.innerWidth < 1024 ? [-0.3, -3.0, 0] : [-0.5, -3, 0]
+                      windowWidth < 1024 ? [-0.3, -3.0, 0] : [-0.5, -3, 0]
                     }
                     rotation={[0, -0.1, 0]}
                   >
-                    <DemoComputer texture={current.texture} />
+                    <Computer texture={current.texture} />
                   </group>
                 </Suspense>
               </Center>

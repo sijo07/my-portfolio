@@ -1,53 +1,55 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
+  const socials = [
+    { icon: <FaGithub size={22} />, href: "https://github.com/sijo07" },
+    {
+      icon: <FaLinkedin size={22} />,
+      href: "https://www.linkedin.com/in/clementsijo/",
+    },
+  ];
+
   return (
-    <footer className="relative bg-black text-white py-12 px-6 sm:px-20 flex flex-col items-center justify-center">
-      {/* Top Section: Brand/Name */}
-      <div className="text-center mb-6">
-        <h2 className="text-purple-300 font-semibold uppercase tracking-widest text-sm sm:text-base">
-          Sijo
-        </h2>
-        <p className="mt-1 text-gray-400 text-sm sm:text-base">
-          Full Stack Developer | React.js, Node.js, MongoDB, MySQL
-        </p>
+    <footer className="relative bg-black text-white py-6 sm:py-10 px-6 sm:px-20 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-5 text-center lg:mt-0 mt-2">
+        <div className="flex flex-col items-center justify-center">
+          <a href="#hero" className="flex flex-col items-center mb-1">
+            <span className="relative w-5 h-8 border-2 border-purple-400 rounded-full flex items-start justify-center overflow-hidden">
+              <span className="absolute w-1.5 h-1.5 bg-purple-400 rounded-full animate-scrollUp" />
+            </span>
+          </a>
+          <a
+            href="#hero"
+            className="text-purple-400 hover:text-white font-semibold text-sm mt-1  transition-colors duration-300"
+          >
+            Back to Top
+          </a>
+        </div>
+
+        <div className="text-purple-400 font-bold text-2xl sm:text-4xl animate-bounce">
+          &lt;/&gt;
+        </div>
+
+        <div className="flex gap-3">
+          {socials.map((social, i) => (
+            <a
+              key={i}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2  rounded-full bg-gray-900/40 border border-purple-500/30 text-purple-300 hover:text-white hover:scale-110 transition-all duration-300"
+            >
+              {social.icon}
+            </a>
+          ))}
+        </div>
       </div>
 
-      {/* Social Links */}
-      <div className="flex gap-6 mb-6">
-        <a
-          href="https://github.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover:text-purple-400 transition-colors duration-300"
-        >
-          <FaGithub size={24} />
-        </a>
-        <a
-          href="https://linkedin.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover:text-purple-400 transition-colors duration-300"
-        >
-          <FaLinkedin size={24} />
-        </a>
-        <a
-          href="https://twitter.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white hover:text-purple-400 transition-colors duration-300"
-        >
-          <FaTwitter size={24} />
-        </a>
-      </div>
-
-      {/* Divider */}
-      <div className="w-full h-[1px] bg-gray-800 mb-6" />
-
-      {/* Bottom Section: Copyright */}
-      <p className="text-gray-500 text-sm sm:text-base text-center">
-        © {new Date().getFullYear()} Sijo. All rights reserved.
+      <div className="w-full h-[1px] bg-gray-800 my-4" />
+      <p className="text-gray-500 text-xs sm:text-sm text-center">
+        © {new Date().getFullYear()} Clementsijo | All rights reserved.
       </p>
     </footer>
   );

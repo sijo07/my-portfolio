@@ -11,6 +11,7 @@ const Contact = () => {
     message: "",
   });
   const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,6 +19,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const response = await fetch(
         "https://getform.io/f/14ebe776-f3da-4bcf-a8af-85222e57a410",
@@ -33,8 +35,10 @@ const Contact = () => {
       } else {
         setStatus("Oops! Something went wrong.");
       }
-    } catch (error) {
+    } catch {
       setStatus("Error sending message.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -43,7 +47,6 @@ const Contact = () => {
       id="contact"
       className="relative flex flex-col justify-center items-center px-10 lg:px-20 py-28 bg-black overflow-hidden"
     >
-      {/* Animated background and glow particles */}
       <div className="absolute inset-0 z-0">
         <AnimatedBackground />
         <div className="absolute inset-0 bg-black/20 mix-blend-screen"></div>
@@ -67,9 +70,7 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 max-w-6xl w-full flex flex-col lg:flex-row items-center justify-between gap-12">
-        {/* Left Section - Info */}
         <motion.div
           className="w-full lg:w-1/2 text-left space-y-8"
           initial={{ opacity: 0, x: -40 }}
@@ -102,7 +103,6 @@ const Contact = () => {
             — I’ll get back to you as soon as possible.
           </motion.p>
 
-          {/* Social Links */}
           <motion.div
             className="flex gap-5 pt-6"
             initial={{ opacity: 0 }}
@@ -112,19 +112,26 @@ const Contact = () => {
             {[
               {
                 icon: <FaLinkedin size={24} />,
-                href: "https://www.linkedin.com/in/clement-sijo-l-421a42222",
+                href: "https://www.linkedin.com/in/clementsijo/",
+                label: "LinkedIn",
               },
               {
                 icon: <FaEnvelope size={24} />,
                 href: "mailto:clementsijo@gmail.com",
+                label: "Email",
               },
-              { icon: <FaPhone size={24} />, href: "tel:+918921386007" },
+              {
+                icon: <FaPhone size={24} />,
+                href: "tel:+918921386007",
+                label: "Phone",
+              },
             ].map((social, i) => (
               <motion.a
                 key={i}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={social.label}
                 whileHover={{
                   scale: 1.2,
                   boxShadow: "0 0 15px rgba(168,85,247,0.7)",
@@ -137,7 +144,6 @@ const Contact = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Section - Contact Form */}
         <motion.div
           className="w-full lg:w-1/2 bg-gradient-to-b from-gray-900 to-black border border-purple-500/20 rounded-2xl p-8 shadow-[0_0_40px_rgba(168,85,247,0.2)]"
           initial={{ opacity: 0, x: 40 }}
@@ -158,61 +164,39 @@ const Contact = () => {
             <input
               type="text"
               name="name"
-              placeholder="Full Name"
+              placeholder="Who’s coding this message?"
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
+              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
             />
             <input
               type="email"
               name="email"
-              placeholder="Email Address"
+              placeholder="Drop your inbox — I’ll deploy my reply soon🚀"
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
+              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
             />
             <input
               type="tel"
               name="phone"
-              placeholder="Phone Number"
+              placeholder="Dial-up vibes? Drop your digits!"
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
+              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
             />
             <textarea
               name="message"
               rows="4"
-              placeholder="Your Message..."
+              placeholder="Drop your message here — I’m all ears"
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none resize-none transition-all"
+              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none resize-none transition-all"
             />
-            <motion.button
-              type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 rounded-lg shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.7)] transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Send
-            </motion.button>
-
-            <AnimatePresence>
-              {status && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20, scale: 0.8 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 20, scale: 0.8 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute left-1/2 transform -translate-x-1/2 bottom-[-60px] bg-purple-800 text-white px-6 py-3 rounded-lg shadow-lg text-center text-sm"
-                >
-                  {status}
-                </motion.div>
-              )}
-            </AnimatePresence>
           </form>
         </motion.div>
       </div>

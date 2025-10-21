@@ -1,86 +1,70 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion, AnimatePresence } from "framer-motion";
-import { skillsData } from "../constants";
+import { motion } from "framer-motion";
 import { AnimatedBackground, AnimatedUnderline } from "../components";
-
-gsap.registerPlugin(ScrollTrigger);
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+import { skillsData } from "../constants";
+import { Marquee } from "../components";
 
 const Skills = () => {
-  useGSAP(() => {
-    gsap.fromTo(
-      ".tech-card",
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power3.out",
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: "#skills",
-          start: "top 85%",
-        },
-      }
-    );
-  });
+  const mid = Math.ceil(skillsData.length / 2);
+  const firstRow = skillsData.slice(0, mid);
+  const secondRow = skillsData.slice(mid);
+
+  const hoverVariant = {
+    scale: 1.05,
+    transition: { type: "spring", stiffness: 250 },
+  };
 
   return (
     <section
       id="skills"
-      className="relative min-h-screen flex flex-col items-start justify-start gap-12 px-6 lg:px-24 py-20 bg-black overflow-hidden"
+      className="relative min-h-screen flex flex-col items-start justify-start gap-10 px-4 sm:px-16 lg:px-24 py-16 sm:py-20 bg-black overflow-hidden"
     >
-      {/* Animated Background */}
       <AnimatedBackground className="absolute inset-0 -z-10" />
 
-      {/* Section Title */}
       <motion.div
-        className="z-10 w-full text-left text-purple-300 mt-6"
+        className="z-10 w-full text-left text-purple-300"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h3 className="text-lg font-semibold uppercase tracking-widest mb-6">
+        <h3 className="text-lg sm:text-xl font-semibold uppercase tracking-widest mt-8">
           Tech Stack
           <AnimatedUnderline />
         </h3>
       </motion.div>
 
-      {/* Skills Cards Grid */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          className="z-10 w-full grid gap-6 grid-cols-3 md:grid-cols-5 lg:grid-cols-8 justify-items-center"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {skillsData.map((skill, index) => (
+      <div className="grid grid-cols-2 gap-3 w-full sm:hidden justify-items-center">
+        {[...firstRow, ...secondRow].map((skill) => (
+          <motion.div
+            key={skill.name}
+            className="tech-card flex flex-col items-center justify-center bg-gray-900 hover:bg-gray-800 transition-all duration-300 w-32 h-20 rounded-lg shadow-md p-2 cursor-pointer"
+            whileHover={hoverVariant}
+          >
+            <motion.img
+              src={skill.path}
+              alt={skill.name}
+              className="w-8 h-8 mb-1 object-contain"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <p className="text-white font-semibold text-[10px] text-center whitespace-nowrap">
+              {skill.name}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="relative hidden sm:flex flex-col items-center justify-center w-[90%] md:w-[80%] lg:w-[70%] mx-auto mt-4 sm:mt-8 overflow-hidden space-y-4">
+        <Marquee pauseOnHover className="[--duration:25s]" repeat={2}>
+          {firstRow.map((skill) => (
             <motion.div
-              key={index}
-              className="tech-card flex flex-col items-center justify-center bg-gray-900 hover:bg-gray-800 transition-all duration-300 w-24 h-44 lg:w-24 lg:h-44 md:w-32 md:h-60 rounded-2xl shadow-lg p-4 cursor-pointer"
-              whileHover={{
-                scale: 1.05,
-                transition: { type: "spring", stiffness: 250 },
-              }}
-              variants={itemVariants}
+              key={skill.name}
+              className="tech-card flex flex-col items-center justify-center bg-gray-900 hover:bg-gray-800 transition-all duration-300 w-28 sm:w-32 md:w-36 h-36 sm:h-40 md:h-44 rounded-2xl shadow-lg p-4 cursor-pointer flex-shrink-0 mx-2"
+              whileHover={hoverVariant}
             >
               <motion.img
                 src={skill.path}
                 alt={skill.name}
-                className="w-10 h-10 sm:w-16 sm:h-16 object-contain mb-4"
+                className="w-12 h-12 sm:w-16 sm:h-16 object-contain mb-3"
                 animate={{ y: [0, -8, 0] }}
                 transition={{
                   duration: 2,
@@ -88,13 +72,41 @@ const Skills = () => {
                   ease: "easeInOut",
                 }}
               />
-              <p className="text-white font-semibold text-xs sm:text-sm text-center">
+              <p className="text-white font-semibold text-sm sm:text-base text-center whitespace-nowrap">
                 {skill.name}
               </p>
             </motion.div>
           ))}
-        </motion.div>
-      </AnimatePresence>
+        </Marquee>
+
+        <Marquee reverse pauseOnHover className="[--duration:25s]" repeat={2}>
+          {secondRow.map((skill) => (
+            <motion.div
+              key={skill.name}
+              className="tech-card flex flex-col items-center justify-center bg-gray-900 hover:bg-gray-800 transition-all duration-300 w-28 sm:w-32 md:w-36 h-36 sm:h-40 md:h-44 rounded-2xl shadow-lg p-4 cursor-pointer flex-shrink-0 mx-2"
+              whileHover={hoverVariant}
+            >
+              <motion.img
+                src={skill.path}
+                alt={skill.name}
+                className="w-12 h-12 sm:w-16 sm:h-16 object-contain mb-3"
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <p className="text-white font-semibold text-sm sm:text-base text-center whitespace-nowrap">
+                {skill.name}
+              </p>
+            </motion.div>
+          ))}
+        </Marquee>
+
+        <div className="absolute left-0 w-32 sm:w-48 md:w-64 h-full pointer-events-none bg-gradient-to-r from-black to-transparent z-20"></div>
+        <div className="absolute right-0 w-32 sm:w-48 md:w-64 h-full pointer-events-none bg-gradient-to-l from-black to-transparent z-20"></div>
+      </div>
     </section>
   );
 };

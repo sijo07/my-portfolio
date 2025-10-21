@@ -4,6 +4,8 @@ import { aboutData, educationData, internshipData } from "../constants";
 import { profile } from "../assets/index.js";
 import { AnimatedBackground, AnimatedUnderline } from "../components";
 
+const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } };
+
 const About = () => {
   return (
     <section
@@ -14,22 +16,23 @@ const About = () => {
         <AnimatedBackground />
         <div className="absolute inset-0 bg-black/20 mix-blend-screen"></div>
         <div className="absolute inset-0 overflow-hidden">
-          {[...Array(12)].map((_, i) => (
-            <motion.span
-              key={i}
-              className="absolute w-3 h-3 rounded-full bg-purple-400/40 blur-md"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-              }}
-              animate={{ y: [0, -40, 0], opacity: [0.3, 1, 0.3] }}
-              transition={{
-                duration: 3 + Math.random() * 3,
-                repeat: Infinity,
-                delay: i * 0.2,
-              }}
-            />
-          ))}
+          {[...Array(12)].map((_, i) => {
+            const top = Math.random() * 100;
+            const left = Math.random() * 100;
+            return (
+              <motion.span
+                key={`dot-${i}`}
+                className="absolute w-3 h-3 rounded-full bg-purple-400/40 blur-md"
+                style={{ top: `${top}%`, left: `${left}%` }}
+                animate={{ y: [0, -40, 0], opacity: [0.3, 1, 0.3] }}
+                transition={{
+                  duration: 3 + Math.random() * 3,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            );
+          })}
         </div>
       </div>
 
@@ -79,23 +82,16 @@ const About = () => {
           >
             <motion.h3
               className="text-purple-300 text-lg font-semibold uppercase tracking-widest"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
+              variants={fadeUp}
             >
               Education
               <AnimatedUnderline />
             </motion.h3>
-
-            {educationData.map((edu, i) => (
+            {educationData.map((edu, index) => (
               <motion.div
-                key={i}
+                key={`${edu.institution}-${index}`}
                 className="text-white"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
+                variants={fadeUp}
               >
                 <p className="font-bold text-lg">{edu.degree}</p>
                 <p className="text-base font-semibold text-gray-400 lining-nums">
@@ -113,23 +109,16 @@ const About = () => {
           >
             <motion.h3
               className="text-purple-300 text-lg font-semibold uppercase tracking-widest"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
+              variants={fadeUp}
             >
               Internship
               <AnimatedUnderline />
             </motion.h3>
-
-            {internshipData.map((intern, i) => (
+            {internshipData.map((intern, index) => (
               <motion.div
-                key={i}
+                key={`${intern.company}-${index}`}
                 className="text-white"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
+                variants={fadeUp}
               >
                 <p className="font-bold text-lg">{intern.position}</p>
                 <p className="text-base font-semibold text-gray-400 lining-nums">
@@ -146,11 +135,9 @@ const About = () => {
           href={aboutData.resumeLink}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Download Resume"
           className="block md:inline-block mx-auto md:mx-0 bg-transparent border-2 border-purple-400 hover:bg-purple-400 hover:text-black transition-all duration-300 ease-in-out text-white text-lg font-semibold py-4 px-10 rounded-xl mt-6"
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0 },
-          }}
+          variants={fadeUp}
         >
           Resume
         </motion.a>

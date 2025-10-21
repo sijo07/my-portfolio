@@ -71,7 +71,6 @@ const Cursor = () => {
       gsap.to(cursor, { backgroundColor: "#D8B4FE", duration: 0.3 });
     };
 
-    // Optional: subtle idle pulsing
     const idlePulse = gsap.to(cursor, {
       scale: 1.05,
       repeat: -1,
@@ -88,7 +87,7 @@ const Cursor = () => {
     const resetIdle = () => {
       clearTimeout(idleTimeout);
       stopIdlePulse();
-      idleTimeout = setTimeout(startIdlePulse, 3000); // start pulse after 3s idle
+      idleTimeout = setTimeout(startIdlePulse, 3000); 
     };
 
     window.addEventListener("mousemove", (e) => {
@@ -105,7 +104,7 @@ const Cursor = () => {
       el.addEventListener("mouseleave", handleHoverOut);
     });
 
-    resetIdle(); // start idle timer
+    resetIdle(); 
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
