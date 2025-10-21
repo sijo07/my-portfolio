@@ -1,14 +1,9 @@
-/* Import Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
-/* Tailwind layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* --------------------------------- */
-/* Base Font Styles */
-/* --------------------------------- */
 body {
   @apply text-white bg-black;
   font-family: "Raleway", sans-serif;
@@ -19,10 +14,11 @@ body {
   position: relative;
   scroll-behavior: smooth;
   transition: background-color 0.3s ease, color 0.3s ease;
-
 }
 
-/* Font utilities */
+/* --------------------------------- */
+/* Font Weights */
+/* --------------------------------- */
 .raleway-regular {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
@@ -34,7 +30,7 @@ body {
 }
 
 /* --------------------------------- */
-/* Scrollbar Styling */
+/* Scrollbar */
 /* --------------------------------- */
 ::-webkit-scrollbar {
   width: 6px;
@@ -42,8 +38,15 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #14b8a6, #3b82f6);
+  background: linear-gradient(to bottom, #6a5acd, #6b3fa0);
   border-radius: 10px;
+  border: 1px solid #0f172a;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #9370db, #781844);
+  box-shadow: 0 0 6px #c084fc;
 }
 
 ::-webkit-scrollbar-track {
@@ -51,7 +54,7 @@ body {
 }
 
 /* --------------------------------- */
-/* Smooth Hover & Selection */
+/* Links, Buttons, Selection */
 /* --------------------------------- */
 a,
 button {
@@ -59,26 +62,21 @@ button {
 }
 
 ::selection {
-  background-color: #14b8a6;
+  background-color: #a855f9;
   color: white;
 }
 
-/* Gradient Text Utility */
 .gradient-text {
-  background: linear-gradient(90deg, #14b8a6, #9333ea);
+  background: linear-gradient(90deg, #6a5acd, #6b3fa0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Input Caret Accent */
 input,
 textarea {
-  caret-color: #14b8a6;
+  caret-color: #a855f7;
 }
 
-/* --------------------------------- */
-/* Section & Panel Styles */
-/* --------------------------------- */
 section {
   position: relative;
   width: 100%;
@@ -95,9 +93,6 @@ section {
   height: 200vh;
 }
 
-/* --------------------------------- */
-/* Mobile: Restore system cursor */
-/* --------------------------------- */
 @media (max-width: 768px) {
   html,
   body,
@@ -110,9 +105,6 @@ section {
   }
 }
 
-/* --------------------------------- */
-/* Responsive Text Sizing */
-/* --------------------------------- */
 @media (max-width: 640px) {
   h1 {
     font-size: 2.5rem !important;
@@ -135,29 +127,18 @@ section {
   }
 }
 
-/* --------------------------------- */
-/* Custom Utilities / Overrides */
-/* --------------------------------- */
-
-/* About Section Clip Path */
 .clip-about,
 .about-container {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
 }
 
-/* About Motion Background Transform */
 .about-bg {
   transform: translate(-50%, -50%);
 }
 
-/* Resume Button Gradient & Shadow */
 .about-button-shadow {
   box-shadow: 20px 20px 60px #1f2634, -20px -20px 60px #1f2634;
-  background: linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
-  );
+  background: linear-gradient(225deg, #a855f7 0%, #9333ea 100%);
   transition: all 0.4s ease-in-out;
 }
 
@@ -166,11 +147,10 @@ section {
   filter: brightness(1.1);
 }
 
-/* Tailwind theme variables for colors */
 :root {
   --card-light: #1e1e2f;
   --text-primary: #ffffff;
-  --primary: #8a2be2;
+  --primary: #a855f7;
 }
 
 .bg-card-light {
@@ -188,11 +168,12 @@ section {
 .border-primary {
   border-color: var(--primary);
 }
-/* Cursor Visibility */
+
 html {
   scroll-behavior: smooth;
   cursor: none;
 }
+
 a,
 button,
 input,
@@ -200,9 +181,7 @@ textarea,
 select {
   cursor: none !important;
 }
-/* --------------------------------- */
-/* Marquee Animations */
-/* --------------------------------- */
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -234,13 +213,19 @@ select {
 }
 
 @keyframes scrollUp {
-  0% { top: 70%; opacity: 0; }
-  30% { top: 50%; opacity: 1; }
-  100% { top: 20%; opacity: 0; }
+  0% {
+    top: 70%;
+    opacity: 0;
+  }
+  30% {
+    top: 50%;
+    opacity: 1;
+  }
+  100% {
+    top: 20%;
+    opacity: 0;
+  }
 }
 .animate-scrollUp {
   animation: scrollUp 1.6s ease-in-out infinite;
 }
-
-
-

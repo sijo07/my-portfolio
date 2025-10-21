@@ -86,7 +86,7 @@ const Projects = () => {
 
           <motion.h2
             variants={itemVariants}
-            className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600 text-4xl sm:text-5xl lg:text-5xl font-bold mt-3 leading-snug"
+            className="bg-clip-text text-transparent bg-gradient-to-r from-[#6b3fa0] to-[#781844] text-4xl sm:text-5xl lg:text-5xl font-bold mt-3 leading-snug"
           >
             {current.title}
           </motion.h2>
@@ -112,7 +112,7 @@ const Projects = () => {
             {current.tags.map((tag, i) => (
               <div
                 key={tag.name}
-                className="group relative flex items-center justify-center px-4 py-2 rounded-2xl bg-gradient-to-tr from-purple-700 to-pink-800 text-white font-semibold text-sm cursor-pointer transform transition-all duration-500 hover:scale-110 hover:rotate-1"
+                className="group relative flex items-center justify-center px-4 py-2 rounded-2xl bg-gradient-to-tr from-[#6b3fa0] to-[#781844] text-white font-semibold text-sm cursor-pointer transform transition-all duration-500 hover:scale-110 hover:rotate-1"
               >
                 <img
                   src={tag.path}
@@ -120,7 +120,7 @@ const Projects = () => {
                   className="w-5 h-5 mr-2 object-contain flex-shrink-0"
                 />
                 <span className="whitespace-nowrap">{tag.name}</span>
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 bg-gradient-to-tr from-purple-400 via-pink-400 to-pink-500 blur-xl transition-opacity duration-300"></div>
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 bg-gradient-to-tr from-[#6b3fa0] to-[#781844] blur-xl transition-opacity duration-300"></div>
               </div>
             ))}
           </motion.div>
@@ -132,7 +132,7 @@ const Projects = () => {
             <button
               aria-label="Previous Project"
               onClick={() => handleNavigation("previous")}
-              className="p-3 bg-gradient-to-tr from-purple-700 to-pink-800 rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all"
+              className="p-3 bg-gradient-to-tr from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all"
             >
               <GrFormPreviousLink size={25} />
             </button>
@@ -141,14 +141,14 @@ const Projects = () => {
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub Repo"
-              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-purple-700 to-pink-800 rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
             >
               <GrGithub size={22} className="text-white" />
             </a>
             <button
               aria-label="Next Project"
               onClick={() => handleNavigation("next")}
-              className="p-3 bg-gradient-to-tr from-purple-700 to-pink-800 rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
+              className="p-3 bg-gradient-to-tr from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
             >
               <GrFormNextLink size={25} />
             </button>
