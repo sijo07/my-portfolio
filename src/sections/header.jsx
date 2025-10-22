@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { staggerContainer, fadeIn, zoomIn } from "../utils/motion";
 import { navLinks } from "../constants";
 import { menu, close } from "../assets";
+import { ContactForm } from "../components";
 
 const socialLinks = [
   {
@@ -311,31 +312,7 @@ const Header = () => {
                   <FiX className="w-6 h-6 text-white hover:text-purple-400 transition-colors" />
                 </button>
               </div>
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-4 py-2 rounded-lg text-white placeholder-purple-300 border border-purple-700 focus:ring-2 focus:ring-purple-400 outline-none bg-black/50"
-                />
-                <input
-                  type="email"
-                  placeholder="Email"
-                  className="w-full px-4 py-2 rounded-lg text-white placeholder-purple-300 border border-purple-700 focus:ring-2 focus:ring-purple-400 outline-none bg-black/50"
-                />
-                <textarea
-                  rows="4"
-                  placeholder="Message"
-                  className="w-full px-4 py-2 rounded-lg text-white placeholder-purple-300 border border-purple-700 focus:ring-2 focus:ring-purple-400 outline-none bg-black/50"
-                />
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="block mx-auto px-4 py-2 rounded-xl border-2 border-purple-700 text-white font-bold bg-gradient-to-r from-purple-700 to-violet-700 hover:from-violet-700 hover:to-purple-700 transition-all duration-500 capitalize"
-                >
-                  Send
-                </motion.button>
-              </form>
+              <ContactForm onSuccess={closeContactForm} />
             </motion.div>
           </motion.div>
         )}
