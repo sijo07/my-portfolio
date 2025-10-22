@@ -192,7 +192,7 @@ const Contact = () => {
               value={formData.phone}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all"
+              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none transition-all lining-nums"
             />
             <textarea
               name="message"
@@ -201,8 +201,53 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none resize-none transition-all"
+              className="w-full p-3 rounded-lg bg-black/30 border border-purple-500/40 text-white placeholder-gray-400 placeholder:text-xs lg:placeholder:text-sm focus:border-purple-400 focus:ring-2 focus:ring-purple-500 outline-none resize-none transition-all lining-nums"
             />
+
+            {/* Submit button */}
+            <motion.button
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(168,85,247,0.7)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full py-3 mt-2 rounded-lg bg-purple-500 text-white font-semibold hover:bg-purple-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isSubmitting ? "Sending..." : "Send Message"}
+            </motion.button>
+
+            {/* Status message */}
+            <AnimatePresence>
+              {status && (
+                <motion.p
+                  key="status"
+                  initial={{ opacity: 0, y: -10, scale: 0.9 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    textShadow:
+                      "0 0 10px rgba(168,85,247,0.6), 0 0 20px rgba(168,85,247,0.4)",
+                  }}
+                  exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                  transition={{
+                    duration: 0.5,
+                    type: "spring",
+                    stiffness: 300,
+                    repeat: Infinity,
+                    repeatType: "mirror",
+                    ease: "easeInOut",
+                  }}
+                  className={`mt-3 text-center text-purple-400 font-semibold text-lg lg:text-xl 
+                 bg-purple-900/20 backdrop-blur-md px-4 py-2 rounded-lg 
+                 shadow-[0_0_15px_rgba(168,85,247,0.5)]`}
+                >
+                  {status}
+                </motion.p>
+              )}
+            </AnimatePresence>
           </form>
         </motion.div>
       </div>
