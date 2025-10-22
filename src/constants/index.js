@@ -60,13 +60,15 @@ export const skillsData = [
   { name: "Git", path: "/assets/git.png" },
   { name: "Github", path: "/assets/github.png" },
 ];
+
 export const myProjects = [
   {
     title: "checkMate - Real Time Cyber Incident Tracker",
     desc: "CheckMate is an cybersecurity monitoring platform that provides real-time insights into global cyber threats.",
     subdesc:
       "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js), along with Leaflet.js, Socket.io, and Threat Intelligence APIs, the system enables users to visualize, track, and analyze cyber incidents as they happen.",
-    href: "https://github.com/sijo07/the-checkmate",
+    git: "https://github.com/sijo07/the-checkmate",
+    href: "",
     texture: "/textures/project/project1.mp4",
     tags: [
       {
@@ -112,7 +114,8 @@ export const myProjects = [
     desc: "theFashionisto is a modern e-commerce platform designed to offer a seamless online shopping experience with efficient product management and user engagement.",
     subdesc:
       "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Vite.js, this platform features secure authentication, a dynamic shopping cart, personalized profiles — all styled with Tailwind CSS for a sleek, responsive design.",
-    href: "https://github.com/sijo07/theFashionisto",
+    git: "https://github.com/sijo07/theFashionisto",
+    href: "",
     texture: "/textures/project/project2.mp4",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
@@ -128,7 +131,8 @@ export const myProjects = [
     desc: "A modern personal portfolio website built to highlight projects, skills, and experience through clean design and smooth animations.",
     subdesc:
       "Developed using Next.js, Tailwind CSS, and Framer Motion, this portfolio emphasizes responsive design, optimized performance, and fluid transitions. It showcases professional projects, certifications, and publications through dynamic layouts and interactive visuals.",
-    href: "https://github.com/sijo07/the-portfolio",
+    git: "https://github.com/sijo07/the-portfolio",
+    href: "https://clementsijo-portfolio-dev.vercel.app/",
     texture: "/textures/project/project3.mp4",
     tags: [
       { id: 1, name: "Next.js", path: "/assets/nextjs.png" },
@@ -143,7 +147,8 @@ export const myProjects = [
     desc: "theGames is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    href: "https://github.com/sijo07/the-gameapp",
+    git: "https://github.com/sijo07/the-gameapp",
+    href: "",
     texture: "/textures/project/project4.mp4",
     tags: [
       {

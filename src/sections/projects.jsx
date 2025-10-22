@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
 import { GrFormNextLink, GrFormPreviousLink, GrGithub } from "react-icons/gr";
+import { FaLink } from "react-icons/fa";
 
 import { myProjects } from "../constants";
 import { CanvasLoader, Computer } from "../components/canvas";
@@ -136,8 +137,9 @@ const Projects = () => {
             >
               <GrFormPreviousLink size={25} />
             </button>
+
             <a
-              href={current.href}
+              href={current.git}
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub Repo"
@@ -145,6 +147,19 @@ const Projects = () => {
             >
               <GrGithub size={22} className="text-white" />
             </a>
+
+            {current.href && (
+              <a
+                href={current.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Live Project Link"
+                className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
+                <FaLink size={22} className="text-white" />
+              </a>
+            )}
+
             <button
               aria-label="Next Project"
               onClick={() => handleNavigation("next")}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaLinkedin, FaEnvelope, FaPhone, } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 import { AnimatedBackground, AnimatedUnderline } from "../components";
 
 const Contact = () => {
@@ -124,6 +125,11 @@ const Contact = () => {
                 icon: <FaPhone size={24} />,
                 href: "tel:+918921386007",
                 label: "Phone",
+              },
+              {
+                icon: <FaLocationDot size={24} />,
+                href: "https://maps.app.goo.gl/r5Reu9e4n7s3mKn16",
+                label: "Location",
               },
             ].map((social, i) => (
               <motion.a
