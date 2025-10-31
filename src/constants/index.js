@@ -54,6 +54,7 @@ export const skillsData = [
   { name: "Bootstrap 5", path: "/assets/bootstrap.png" },
   { name: "Node.js", path: "/assets/node.png" },
   { name: "MongoDB", path: "/assets/mongodb.png" },
+  { name: "Docker", path: "/assets/docker.png" },
   { name: "JavaScript", path: "/assets/javascript.png" },
   { name: "CSS3", path: "/assets/css.png" },
   { name: "HTML", path: "/assets/html.png" },
